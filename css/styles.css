@@ -201,3 +201,15 @@ body, html {
         gap: 20px;
     }
 }
+
+.mouse-circle {
+    width: 50px;
+    height: 50px;
+    background-color: rgba(255, 255, 255, 0.2);
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    transition: transform 0.05s ease;
+    z-index: 9999;
+}
+
