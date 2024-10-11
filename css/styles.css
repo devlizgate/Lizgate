@@ -213,3 +213,43 @@ body, html {
     z-index: 9999;
 }
 
+/* Media Queries for Mobile Responsiveness */
+@media (max-width: 768px) {
+    .services {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .client-icons {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .navbar .nav-list {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .landing-page {
+        padding: 20px;
+    }
+
+    .cta-button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 2.5rem;
+    }
+
+    .headline {
+        font-size: 1.2rem;
+    }
+
+    .subheadline {
+        font-size: 1rem;
+        margin-bottom: 20px;
+    }
+}
