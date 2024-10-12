@@ -119,7 +119,7 @@
         /* Small note at the bottom explaining domain host change */
         .status-note {
             position: absolute;
-            bottom: 30px;
+            bottom: 60px; /* Increased space between footer and status note */
             width: 100%;
             text-align: center;
             font-size: 0.9rem;
@@ -168,6 +168,13 @@
             }
             a {
                 font-size: 1.1rem;
+            }
+            /* Mobile adjustment for footer and note spacing */
+            .status-note {
+                bottom: 80px;
+            }
+            .footer {
+                bottom: 20px;
             }
         }
     </style>
