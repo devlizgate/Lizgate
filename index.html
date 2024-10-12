@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="Lizgate Corporation - Website Under Construction">
     
     <title>Lizgate Under Construction</title>
@@ -11,213 +10,197 @@
     <!-- Google Font: Montserrat -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 
+    <!-- Stylesheet -->
     <style>
         body {
             margin: 0;
             padding: 0;
-            background-color: #000;
+            background-color: #1c1c1c; /* Dark background */
             font-family: 'Montserrat', Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
             height: 100vh;
-            color: #fff;
+            color: #ffffff; /* White text */
             text-align: center;
+            position: relative; /* For background effects */
+            overflow: hidden;
         }
 
         h1 {
             font-size: 3rem;
-            color: #ff69b4;
+            color: #0a84ff; /* Bold Blue */
             margin-bottom: 20px;
             font-weight: 700;
+            letter-spacing: 1.5px;
+        }
+
+        /* RGB Flashing Effect for "Sh*t" */
+        .rgb-flash {
+            color: #ff69b4;
+            animation: rgb-flash 1.5s infinite alternate;
+        }
+
+        @keyframes rgb-flash {
+            0% { color: #ff69b4; } /* Pink */
+            33% { color: #00ffff; } /* Cyan */
+            66% { color: #00ff00; } /* Green */
+            100% { color: #ff69b4; } /* Pink again */
+        }
+
+        /* Faster RGB Loading Bar at Top */
+        .rgb-loading {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background-color: #ff69b4;
+            animation: rgb-loading 1s infinite linear;
+        }
+
+        @keyframes rgb-loading {
+            0% { background-color: #ff69b4; } /* Pink */
+            25% { background-color: #00ffff; } /* Cyan */
+            50% { background-color: #00ff00; } /* Green */
+            75% { background-color: #ff0000; } /* Red */
+            100% { background-color: #ff69b4; } /* Pink again */
         }
 
         p {
-            font-size: 1.2rem;
-            margin: 10px 0;
+            font-size: 1.3rem;
+            margin: 20px 0;
             font-weight: 400;
+            color: #e0e0e0; /* Light gray text */
         }
 
         a {
-            color: #00ffff;
+            color: #0a84ff; /* Blue link */
             text-decoration: none;
+            font-weight: bold;
+            padding: 12px 25px;
+            border: 2px solid #0a84ff;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            margin: 10px 0;
+            display: inline-block;
         }
 
-        /* Game and control UI */
-        #game {
-            display: none; /* Game starts hidden */
+        a:hover {
+            background-color: #0a84ff;
+            color: #ffffff;
+        }
+
+        /* Facebook Link Container */
+        #facebookLink {
+            margin-top: 30px;
+        }
+
+        /* Vertical Centering & Spacing Adjustments */
+        .content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+            text-align: center;
+        }
+
+        .contact-links {
             margin-top: 20px;
-            position: relative;
-            width: 600px;
-            height: 150px;
-            border: 2px solid #fff;
-        }
-
-        #startButton {
-            background-color: #ff69b4;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            font-size: 1.2rem;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-
-        canvas {
-            background-color: #f4f4f4;
         }
 
         .tip {
             margin-top: 10px;
             font-size: 1rem;
+            color: #777;
         }
+
+        /* Small note at the bottom explaining domain host change */
+        .status-note {
+            position: absolute;
+            bottom: 30px;
+            width: 100%;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #999;
+        }
+
+        /* Copyright Section */
+        .footer {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        /* Gaming-themed background effects */
+        .pixelated-effect {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.1); /* Light translucent effect */
+            width: 10px;
+            height: 10px;
+            animation: move-pixel 10s linear infinite;
+        }
+
+        /* Animation for pixels */
+        @keyframes move-pixel {
+            0% { transform: translateY(0) translateX(0); }
+            100% { transform: translateY(100vh) translateX(100vw); }
+        }
+
+        /* Different variations of pixel effects */
+        .pixelated-effect:nth-child(1) { left: 10%; top: -10px; }
+        .pixelated-effect:nth-child(2) { left: 25%; top: -50px; animation-duration: 8s; }
+        .pixelated-effect:nth-child(3) { left: 50%; top: -30px; animation-duration: 12s; }
+        .pixelated-effect:nth-child(4) { left: 70%; top: -80px; animation-duration: 6s; }
+        .pixelated-effect:nth-child(5) { left: 90%; top: -20px; animation-duration: 15s; }
 
         /* Media query for mobile */
         @media (max-width: 768px) {
             h1 {
-                font-size: 2rem;
+                font-size: 2.5rem;
             }
             p {
-                font-size: 1rem;
+                font-size: 1.2rem;
             }
-            #game {
-                width: 100%;
+            a {
+                font-size: 1.1rem;
             }
         }
     </style>
 </head>
 
 <body>
+    <!-- RGB Loading Effect at Top -->
+    <div class="rgb-loading"></div>
+
     <div class="content">
-        <h1>Sh*t Happened!</h1>
+        <h1><span class="rgb-flash">Sh*t</span> Happened!</h1>
         <p>We're updating our website.</p>
-        <p>Email <a href="mailto:gsmith@lizgate.com">gsmith@lizgate.com</a> or call/text <a href="tel:+19374744428">937-474-4428</a></p>
-        <p>We'll be back better than ever!</p>
-
-        <!-- Start Game Button -->
-        <button id="startButton">Start the Game</button>
+        <div class="contact-links">
+            <p>Email <a href="mailto:gsmith@lizgate.com">gsmith@lizgate.com</a> or call/text <a href="tel:+19374744428">937-474-4428</a></p>
+        </div>
+        <p id="facebookLink">Check our updates on <a href="https://www.facebook.com/people/Lizgate/61556405821992/" target="_blank">Facebook</a></p>
     </div>
 
-    <!-- Game Section -->
-    <div id="game">
-        <canvas id="tRexGame" width="600" height="150"></canvas>
-        <p class="tip">Press ESC to exit the game.</p>
+    <!-- Gaming-themed background effects -->
+    <div class="pixelated-effect"></div>
+    <div class="pixelated-effect"></div>
+    <div class="pixelated-effect"></div>
+    <div class="pixelated-effect"></div>
+    <div class="pixelated-effect"></div>
+
+    <!-- Small note explaining the change -->
+    <div class="status-note">
+        We've changed domain hosts and will be updating our HTML, CSS & JavaScript. This will take some time, but production will not stop. If you're an existing customer, we can still access your domain.
     </div>
 
-    <script>
-        var canvas = document.getElementById('tRexGame');
-        var ctx = canvas.getContext('2d');
-        var gameRunning = false;
-        var dino = { x: 50, y: 110, width: 40, height: 40, dy: 0, jumpPower: -10, gravity: 0.5, grounded: true };
-        var cacti = [];
-        var score = 0;
-        var gameOver = false;
-        var cactusInterval = 1500;
-        var cactusSpeed = -6;
-
-        // Game Start Button
-        document.getElementById('startButton').addEventListener('click', function() {
-            document.getElementById('game').style.display = 'block';
-            document.querySelector('.content').style.display = 'none';
-            gameRunning = true;
-            gameOver = false;
-            score = 0;
-            resetGame();
-            spawnCactus();
-        });
-
-        // Exit game with ESC
-        window.addEventListener('keydown', function (e) {
-            if (e.code === 'Escape' && gameRunning) {
-                gameRunning = false;
-                document.getElementById('game').style.display = 'none';
-                document.querySelector('.content').style.display = 'block';
-            }
-        });
-
-        // Game mechanics and updates
-        function drawDino() {
-            ctx.fillStyle = 'gray';
-            ctx.fillRect(dino.x, dino.y, dino.width, dino.height);
-        }
-
-        function drawCacti() {
-            cacti.forEach(function(cactus) {
-                ctx.fillStyle = 'green';
-                ctx.fillRect(cactus.x, cactus.y, cactus.width, cactus.height);
-            });
-        }
-
-        function update() {
-            if (gameRunning && !gameOver) {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-                // Dino jump logic
-                if (!dino.grounded) {
-                    dino.dy += dino.gravity;
-                    dino.y += dino.dy;
-                    if (dino.y >= 110) {
-                        dino.y = 110;
-                        dino.grounded = true;
-                        dino.dy = 0;
-                    }
-                }
-
-                // Move the cacti
-                cacti.forEach(function(cactus, index) {
-                    cactus.x += cactus.dx;
-                    if (cactus.x + cactus.width < 0) {
-                        cacti.splice(index, 1);
-                        score += 1;
-                    }
-                });
-
-                // Collision detection
-                cacti.forEach(function(cactus) {
-                    if (dino.x < cactus.x + cactus.width && dino.x + dino.width > cactus.x &&
-                        dino.y < cactus.y + cactus.height && dino.y + dino.height > cactus.y) {
-                        gameOver = true;
-                        alert('Game Over! Your score: ' + score);
-                        resetGame();
-                    }
-                });
-
-                // Draw everything
-                drawDino();
-                drawCacti();
-
-                // Draw score
-                ctx.fillStyle = 'black';
-                ctx.font = '20px Arial';
-                ctx.fillText('Score: ' + score, 10, 20);
-            }
-
-            requestAnimationFrame(update);
-        }
-
-        function spawnCactus() {
-            if (gameRunning) {
-                cacti.push({ x: canvas.width, y: 110, width: 20, height: 40, dx: cactusSpeed });
-                setTimeout(spawnCactus, cactusInterval); // Keep spawning cacti
-            }
-        }
-
-        function resetGame() {
-            dino.y = 110;
-            dino.grounded = true;
-            dino.dy = 0;
-            cacti = [];
-        }
-
-        window.addEventListener('keydown', function (e) {
-            if (e.code === 'Space' && dino.grounded) {
-                dino.dy = dino.jumpPower;
-                dino.grounded = false;
-            }
-        });
-
-        update();
-    </script>
+    <!-- Copyright Section -->
+    <div class="footer">
+        &copy; 2024 Lizgate Corporation | All Rights Reserved
+    </div>
 </body>
 </html>
