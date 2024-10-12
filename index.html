@@ -2,97 +2,71 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Lizgate Corporation: You don’t have time for this sh*t! But we do.">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/buttons.css">
+    <link rel="stylesheet" href="css/typography.css">
+    <link rel="stylesheet" href="css/animations.css">
     <title>Lizgate Corporation</title>
-    <!-- Link Stylesheets -->
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/header.css">
-    <link rel="stylesheet" href="css/footer.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;400;600&display=swap" rel="stylesheet">
-    <!-- Favicon -->
-    <link rel="icon" href="assets/images/favicon/lizgate_favicon.ico" type="image/x-icon">
 </head>
 <body>
-    <!-- Header Section -->
-    <header class="main-header">
-    <nav class="navbar">
-        <div class="hamburger" id="hamburger">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
+    <!-- Fixed Navigation Bar -->
+    <div class="sidebar">
+        <div class="logo">
+            <img src="assets/images/logo/lizgate_logo.png" alt="Lizgate Corporation Logo">
         </div>
-        <ul class="nav-list" id="nav-list">
-            <li><a href="index.html" class="nav-item">Home</a></li>
-            <li><a href="lizgate.ai/our-products/products.html" class="nav-item">Products</a></li>
-            <li><a href="lizgate.ai/our-solutions/solutions.html" class="nav-item">Solutions</a></li>
-            <li><a href="lizgate.ai/about/about.html" class="nav-item">About</a></li>
-            <li><a href="lizgate.ai/contact-us/contact.html" class="nav-item">Contact Us</a></li>
-        </ul>
-    </nav>
-</header>
+        <nav class="vertical-nav">
+            <ul>
+                <li><a href="pages/about/about_header.html" class="nav-link">About Us</a></li>
+                <li><a href="pages/solutions/solutions_section1.html" class="nav-link">Solutions</a></li>
+                <li><a href="pages/contact/contact_map.html" class="nav-link">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
 
-    <!-- Landing Page Section -->
-    <section id="home" class="landing-page">
-        <div class="content-center">
-            <h1 class="title">LIZGATE CORPORATION</h1>
-            <h2 class="headline">Innovate. Integrate. Dominate.</h2>
-            <p class="subheadline">Unleashing technology with unparalleled precision.</p>
-            <button class="cta-button">Explore Now</button>
-        </div>
-    </section>
+    <!-- Hero Section with adjusted resolution and padding -->
+    <section class="hero">
+        <video autoplay muted loop class="hero-video">
+            <source src="assets/videos/hero/hero_background.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="hero-overlay"></div>
 
-    <!-- Services Section -->
-    <section id="services" class="content-section">
-        <h1 class="section-title">Our Services</h1>
-        <div class="services">
-            <div class="service">
-                <h2>Website Design</h2>
-                <p>We create high-quality, tailored websites to help businesses thrive online. From simple landing pages to complex e-commerce solutions.</p>
-            </div>
-            <div class="service">
-                <h2>Branding & Identity</h2>
-                <p>Our team specializes in creating strong, cohesive branding materials, from logos to full identity packages that resonate with your audience.</p>
-            </div>
-            <div class="service">
-                <h2>Client Success Stories</h2>
-                <p>Trusted by businesses like Reeds Can Cleaners, LLC and Dead Weight Fit Co. to bring their brands to life.</p>
-            </div>
+        <!-- Contact CTA Button in Top-Right -->
+        <div class="cta-button">
+            <a href="mailto:gsmith@lizgate.com?subject=Learn%20More%20About%20Lizgate%20Corporation" class="btn btn-primary">Contact</a>
         </div>
     </section>
 
-    <!-- Client Icon Banner -->
-    <section id="client-banner" class="client-banner">
-        <h2 class="client-banner-title">Trusted by local businesses you may know</h2>
-        <div class="client-icons">
-            <img src="assets/images/testimony/dwfc_test.png" alt="Dead Weight Fit Co." class="client-icon">
-            <img src="assets/images/testimony/rcc_test.png" alt="Reeds Can Cleaners, LLC" class="client-icon">
-        </div>
+    <!-- Content Section 1: Empowering Businesses with Digital Solutions -->
+    <section class="content-section" id="section1">
+        <h2>Empowering Your Business with Digital Solutions</h2>
+        <p>
+            Lizgate Corporation focuses on delivering cutting-edge digital services. Whether you need a custom-designed website, impactful graphic services, or innovative 3D printing, we provide the tools to transform your vision into reality.
+        </p>
+        <p>
+            Our team of experts ensures that every solution we build is tailored to meet your specific business needs, allowing you to stay ahead in an ever-evolving digital landscape.
+        </p>
     </section>
 
-    <!-- Testimonials Section -->
-    <section id="clients" class="content-section light-bg">
-        <h1 class="section-title">What Our Clients Say</h1>
-        <div class="testimonials">
-            <div class="testimonial">
-                <p>"Lizgate Corporation delivered an amazing website for us, support is fast & reliable!" — Reeds Can Cleaners, LLC</p>
-            </div>
-            <div class="testimonial">
-                <p>"They truly understand branding and have created a strong visual identity for Dead Weight Fit Co." — Dead Weight Fit Co.</p>
-            </div>
-        </div>
+    <!-- Content Section 2: Tailored Solutions to Meet Your Needs -->
+    <section class="content-section dark-section" id="section2">
+        <h2>Tailored Solutions to Meet Your Needs</h2>
+        <p>
+            No two businesses are alike, which is why we offer a range of services designed to be flexible and scalable. From branding and design to complete website builds, Lizgate ensures that each project reflects your unique identity and supports your long-term success.
+        </p>
+        <p>
+            Time is precious — let us handle the complexities of digital strategy and execution so that you can focus on what truly matters: growing your business.
+        </p>
     </section>
 
-    <!-- Footer Section -->
+    <!-- Footer -->
     <footer>
         <p>&copy; 2024 Lizgate Corporation. All Rights Reserved.</p>
     </footer>
 
-    <!-- Circle Animation for Mouse Movement -->
-    <div class="mouse-circle"></div>
-
-    <!-- Scripts -->
-    <script src="js/scripts.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/animations.js"></script>
 </body>
 </html>
