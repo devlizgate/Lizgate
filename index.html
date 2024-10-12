@@ -8,21 +8,20 @@
     
     <title>Lizgate Under Construction</title>
     
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <!-- Google Font: Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 
-    <!-- Stylesheet -->
     <style>
         body {
             margin: 0;
             padding: 0;
             background-color: #000;
-            font-family: 'Press Start 2P', cursive;
+            font-family: 'Montserrat', Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
             height: 100vh;
-            overflow: hidden;
             color: #fff;
             text-align: center;
         }
@@ -31,11 +30,13 @@
             font-size: 3rem;
             color: #ff69b4;
             margin-bottom: 20px;
+            font-weight: 700;
         }
 
         p {
             font-size: 1.2rem;
             margin: 10px 0;
+            font-weight: 400;
         }
 
         a {
@@ -43,49 +44,35 @@
             text-decoration: none;
         }
 
-        .background-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
+        /* Game and control UI */
+        #game {
+            display: none; /* Game starts hidden */
+            margin-top: 20px;
+            position: relative;
+            width: 600px;
+            height: 150px;
+            border: 2px solid #fff;
         }
 
-        /* Fun Background Elements (animated) */
-        .shape {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
-            animation: float 10s ease-in-out infinite;
-            mix-blend-mode: screen;
+        #startButton {
+            background-color: #ff69b4;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin-top: 20px;
         }
 
-        /* Different sizes for variety */
-        .shape-small { width: 50px; height: 50px; }
-        .shape-medium { width: 100px; height: 100px; }
-        .shape-large { width: 200px; height: 200px; }
-
-        /* Floating animation */
-        @keyframes float {
-            0% {
-                transform: translateY(0) translateX(0);
-            }
-            50% {
-                transform: translateY(-100px) translateX(50px);
-            }
-            100% {
-                transform: translateY(0) translateX(0);
-            }
+        canvas {
+            background-color: #f4f4f4;
         }
 
-        /* More variation for direction and speed */
-        .shape:nth-child(2) { animation-duration: 12s; animation-direction: reverse; }
-        .shape:nth-child(3) { animation-duration: 8s; }
-        .shape:nth-child(4) { animation-duration: 15s; animation-direction: reverse; }
-        .shape:nth-child(5) { animation-duration: 18s; }
-        
+        .tip {
+            margin-top: 10px;
+            font-size: 1rem;
+        }
+
         /* Media query for mobile */
         @media (max-width: 768px) {
             h1 {
@@ -93,6 +80,9 @@
             }
             p {
                 font-size: 1rem;
+            }
+            #game {
+                width: 100%;
             }
         }
     </style>
@@ -104,16 +94,130 @@
         <p>We're updating our website.</p>
         <p>Email <a href="mailto:gsmith@lizgate.com">gsmith@lizgate.com</a> or call/text <a href="tel:+19374744428">937-474-4428</a></p>
         <p>We'll be back better than ever!</p>
+
+        <!-- Start Game Button -->
+        <button id="startButton">Start the Game</button>
     </div>
 
-    <!-- Background Container -->
-    <div class="background-container">
-        <!-- Animated Shapes -->
-        <div class="shape shape-small"></div>
-        <div class="shape shape-medium"></div>
-        <div class="shape shape-large"></div>
-        <div class="shape shape-small"></div>
-        <div class="shape shape-medium"></div>
+    <!-- Game Section -->
+    <div id="game">
+        <canvas id="tRexGame" width="600" height="150"></canvas>
+        <p class="tip">Press ESC to exit the game.</p>
     </div>
+
+    <script>
+        var canvas = document.getElementById('tRexGame');
+        var ctx = canvas.getContext('2d');
+        var gameRunning = false;
+        var dino = { x: 50, y: 110, width: 40, height: 40, dy: 0, jumpPower: -10, gravity: 0.5, grounded: true };
+        var cacti = [];
+        var score = 0;
+        var gameOver = false;
+        var cactusInterval = 1500;
+        var cactusSpeed = -6;
+
+        // Game Start Button
+        document.getElementById('startButton').addEventListener('click', function() {
+            document.getElementById('game').style.display = 'block';
+            document.querySelector('.content').style.display = 'none';
+            gameRunning = true;
+            gameOver = false;
+            score = 0;
+            resetGame();
+            spawnCactus();
+        });
+
+        // Exit game with ESC
+        window.addEventListener('keydown', function (e) {
+            if (e.code === 'Escape' && gameRunning) {
+                gameRunning = false;
+                document.getElementById('game').style.display = 'none';
+                document.querySelector('.content').style.display = 'block';
+            }
+        });
+
+        // Game mechanics and updates
+        function drawDino() {
+            ctx.fillStyle = 'gray';
+            ctx.fillRect(dino.x, dino.y, dino.width, dino.height);
+        }
+
+        function drawCacti() {
+            cacti.forEach(function(cactus) {
+                ctx.fillStyle = 'green';
+                ctx.fillRect(cactus.x, cactus.y, cactus.width, cactus.height);
+            });
+        }
+
+        function update() {
+            if (gameRunning && !gameOver) {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                // Dino jump logic
+                if (!dino.grounded) {
+                    dino.dy += dino.gravity;
+                    dino.y += dino.dy;
+                    if (dino.y >= 110) {
+                        dino.y = 110;
+                        dino.grounded = true;
+                        dino.dy = 0;
+                    }
+                }
+
+                // Move the cacti
+                cacti.forEach(function(cactus, index) {
+                    cactus.x += cactus.dx;
+                    if (cactus.x + cactus.width < 0) {
+                        cacti.splice(index, 1);
+                        score += 1;
+                    }
+                });
+
+                // Collision detection
+                cacti.forEach(function(cactus) {
+                    if (dino.x < cactus.x + cactus.width && dino.x + dino.width > cactus.x &&
+                        dino.y < cactus.y + cactus.height && dino.y + dino.height > cactus.y) {
+                        gameOver = true;
+                        alert('Game Over! Your score: ' + score);
+                        resetGame();
+                    }
+                });
+
+                // Draw everything
+                drawDino();
+                drawCacti();
+
+                // Draw score
+                ctx.fillStyle = 'black';
+                ctx.font = '20px Arial';
+                ctx.fillText('Score: ' + score, 10, 20);
+            }
+
+            requestAnimationFrame(update);
+        }
+
+        function spawnCactus() {
+            if (gameRunning) {
+                cacti.push({ x: canvas.width, y: 110, width: 20, height: 40, dx: cactusSpeed });
+                setTimeout(spawnCactus, cactusInterval); // Keep spawning cacti
+            }
+        }
+
+        function resetGame() {
+            dino.y = 110;
+            dino.grounded = true;
+            dino.dy = 0;
+            cacti = [];
+        }
+
+        window.addEventListener('keydown', function (e) {
+            if (e.code === 'Space' && dino.grounded) {
+                dino.dy = dino.jumpPower;
+                dino.grounded = false;
+            }
+        });
+
+        update();
+    </script>
 </body>
 </html>
