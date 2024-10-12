@@ -1,23 +1,16 @@
-document.addEventListener('mousemove', (e) => {
-    const circle = document.querySelector('.mouse-circle');
-    circle.style.left = `${e.pageX}px`;
-    circle.style.top = `${e.pageY}px`;
-});
-
-// Smooth Scroll Behavior for Navbar
 document.querySelectorAll('.nav-item').forEach(item => {
     item.addEventListener('click', (e) => {
-        e.preventDefault();
-        const targetId = e.target.getAttribute('href').substring(1);
-        const targetSection = document.getElementById(targetId);
-        targetSection.scrollIntoView({ behavior: 'smooth' });
+        const href = e.target.getAttribute('href');
+        
+        if (href.startsWith('#')) {
+            // Only prevent default for in-page links
+            e.preventDefault();
+            const targetId = href.substring(1);
+            const targetSection = document.getElementById(targetId);
+            targetSection.scrollIntoView({ behavior: 'smooth' });
+        } else {
+            // For external pages, allow navigation
+            window.location.href = href;
+        }
     });
-});
-
-// Hamburger Menu Toggle
-const hamburger = document.getElementById('hamburger');
-const navList = document.getElementById('nav-list');
-
-hamburger.addEventListener('click', () => {
-    navList.classList.toggle('active');
 });
