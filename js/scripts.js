@@ -13,3 +13,11 @@ document.querySelectorAll('.nav-item').forEach(item => {
         targetSection.scrollIntoView({ behavior: 'smooth' });
     });
 });
+
+// Hamburger Menu Toggle
+const hamburger = document.getElementById('hamburger');
+const navList = document.getElementById('nav-list');
+
+hamburger.addEventListener('click', () => {
+    navList.classList.toggle('active');
+});
